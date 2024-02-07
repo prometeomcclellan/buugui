@@ -16,7 +16,7 @@
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
-@import '@ionic/angular/css/display.css';
+@import "@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
@@ -24,3 +24,163 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+@import "./theme/fonts.scss";
+@import "./theme/styles.scss";
+@import "material-icons/iconfont/material-icons.css";
+
+* {
+  font-family: "Proxima_Nova";
+}
+
+ion-content::part(scroll)::-webkit-scrollbar {
+  display: none;
+}
+
+ion-content {
+  --background: var(--bodyBackColor);
+}
+
+.ellipseText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.horizontalScroll {
+  overflow-x: scroll;
+  white-space: nowrap;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.exitWrapper {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.exitText {
+  background-color: #414040;
+  padding: 10px 15px;
+  border-radius: 20px;
+}
+
+.margin20 {
+  margin: 20px;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.rowAlignCenter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.columnAlignCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imageOverflow {
+  overflow: hidden;
+  object-fit: cover;
+}
+
+ion-toast {
+  --color: var(--whiteColor);
+  --background: #333333;
+  --box-shadow: 0 0 0;
+  --border-radius: 5px;
+}
+
+ion-modal {
+  --width: 100%;
+  --height: fit-content;
+  --border-radius: 10px;
+}
+
+ion-action-sheet.my-custom-class .action-sheet-title {
+  color: var(--whiteColor);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+ion-action-sheet.my-custom-class .action-sheet-button.ion-focused {
+  color: red;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+ion-action-sheet.my-custom-class {
+  --background: #c2c2c2;
+  --backdrop-opacity: 0.6;
+  --button-background-selected: var(--whiteColor);
+}
+
+.switch {
+  --track-background: #9e9e9e;
+  --handle-height: 25px;
+  --handle-width: 25px;
+}
+
+.gradientWrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0.1, 0, 0.7),
+    var(--blackColor)
+  );
+}
+
+.gradientButton {
+  border-radius: 25px;
+  padding: 15px;
+  background: linear-gradient(
+    to left,
+    rgba(244, 67, 54, 0.9),
+    rgba(244, 67, 54, 0.6),
+    rgba(244, 67, 54, 0.3)
+  );
+}
+
+.iti .iti__country-list {
+  font-size: 14px;
+  color: var(--blackColor);
+  height: 400px;
+  margin-top: 50%;
+  background-color: var(--whiteColor);
+  border-radius: 5px;
+}
+
+.iti .iti__selected-flag {
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.01);
+  margin-right: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--whiteColor);
+}

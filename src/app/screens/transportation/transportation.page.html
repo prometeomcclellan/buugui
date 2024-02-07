@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{trName}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{trName}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card  [ngStyle]="{'background-image': 'url(' + trImage + ')'}" 
+        style="background-size: cover;background-position: center center;background-repeat: no-repeat;width: 100vw;height: 70vh;
+        padding: 0;margin: 0;">
+  </ion-card>
+
+  <ion-fab style="position: fixed;bottom: 20.5%;left: 40%;" vertical="bottom" horizontal="start">
+    <ion-fab-button (click)="'goBack()'">
+      <ion-icon name="eye" style="font-size: 3rem;"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

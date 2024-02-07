@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'ionic-TikStar',
+  appId: 'com.ionic.TikStar',
+  appName: 'buugui',
   webDir: 'www',
   server: {
     androidScheme: 'https'

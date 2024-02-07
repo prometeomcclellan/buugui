@@ -1,0 +1,50 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom" mode="md" *ngIf="showTabs">
+    <ion-tab-button tab="reels"
+    (click)="setActiveTab(0)">
+      <!--span class="material-icons" style="font-size: 27px">home</span -->
+      <ion-icon
+        name="film"
+        style="font-size: 24px;color: white;"
+        class="icono-tab"
+        >
+      </ion-icon>
+      <ion-text mode="md"> Reels </ion-text>
+    </ion-tab-button>
+
+    <ion-tab-button tab="search" style="width: 70px;"
+    (click)="setActiveTab(1)">
+      <!--ion-icon name="add"></ion-icon -->
+      <ion-img
+        src="../../../assets/images/logo.png"
+        style="width: 110px; height: 110px; object-fit: contain"
+        class="icono-tab"
+      ></ion-img>
+    </ion-tab-button>
+
+    <ion-tab-button tab="geo"
+    (click)="setActiveTab(2)">
+      <ion-icon
+        name="location"
+        style="font-size: 24px;color: white;"
+        class="icono-tab"
+      (click)="$event.stopPropagation();goTo('geo')">
+      </ion-icon>
+      <ion-text> Mapa </ion-text>
+    </ion-tab-button>
+
+    
+
+    <!--ion-tab-button tab="notifications">
+      <span class="material-icons" style="font-size: 27px">
+        notifications_none
+      </span>
+      <ion-text mode="md"> Notifications </ion-text>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile">
+      <span class="material-icons" style="font-size: 27px">person</span>
+      <ion-text mode="md"> Me </ion-text>
+    </ion-tab-button-->
+  </ion-tab-bar>
+</ion-tabs>

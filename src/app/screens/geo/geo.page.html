@@ -1,0 +1,12 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="blackColor" style="color: lightgray;">
+    <ion-title>
+      Ubicaciones en el mapa
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--background: transparent;">
+  <capacitor-google-map #map (mapClick)="'addMapMarker($event)'"></capacitor-google-map>
+  </ion-content>
+

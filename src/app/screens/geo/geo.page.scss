@@ -1,0 +1,41 @@
+main{
+    background: aliceblue;
+}
+
+.container{
+    width: 80%;
+    height: 80%;
+}
+
+capacitor-google-map{
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+
+}
+
+.map {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    width: 80%;
+    height: 50%;
+  
+    img {
+      width: 100%;
+      height: 50%;
+    }
+  
+    ion-icon {
+      color: var(--primary);
+      position: absolute;
+      z-index: 99;
+      font-size: 2.2rem;
+  
+      &.active {
+        color: var(--secondary);
+        font-size: 2.4rem;
+      }
+  
+    }
+  }

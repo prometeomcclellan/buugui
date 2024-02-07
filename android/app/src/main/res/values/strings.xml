@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">buugui</string>
+    <string name="title_activity_main">buugui</string>
+    <string name="package_name">com.ionic.TikStar</string>
+    <string name="custom_url_scheme">com.ionic.TikStar</string>
+</resources>

@@ -1,0 +1,301 @@
+<ion-header mode="ios" [translucent]="false" class="ion-no-border">
+  <ion-toolbar color="bodyBackColor">
+    <div class="rowAlignCenter searchFieldWrapper">
+      <!--ion-icon name="search" color="whiteColor" style="font-size: 20px">
+      </ion-icon>
+      <ion-input
+        mode="ios"
+        placeholder="Search hastag or username"
+        class="whiteColor15Regular textfield"
+        [(ngModel)]="search"
+      >
+      </ion-input -->
+      <ion-searchbar #resultsSearch animated="true" placeholder="Qué quieres hacer?" show-clear-button="focus"
+      show-cancel-button="focus" style="padding: 0;margin: 0;color: white;"
+      [debounce]="1000" (ionInput)="handleInput($event)" (click)="hideSlider()" (ionBlur)="showSlider()"
+      (ionChange)="validateSearch($event)"></ion-searchbar>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="bannerSlider" #bannerSlider style="position: relative">
+    <swiper-container
+      #swiper
+      (slidechange)="slideChangeCall()"
+      [autoplay]="{autoplay:true,disableOnInteraction:false,delay:2900}"
+    >
+      <swiper-slide *ngFor="let item of bannerSliderList;let i=index;">
+        <div style="position: relative">
+          <ion-img
+            class="imageOverflow"
+            [src]="item.image"
+            style="width: 100%; height: 200px"
+          >
+          </ion-img>
+          <div class="column bannerOverlay">
+            <ion-text class="whiteColor16Bold">{{item.hasTag}} </ion-text>
+            <ion-text
+              class="whiteColor14Regular"
+              style="margin: 10px 0; line-height: 18px"
+            >
+              Te mostraremos lo más top en <br />#{{item.hasTag}} </ion-text>
+            <div class="createNowButton">
+              <ion-text class="whiteColor16Bold"> Buscar Localmente </ion-text>
+            </div>
+          </div>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+    <div class="rowAlignCenter pagination">
+      <div *ngFor="let banner of bannerSliderList;let i=index;">
+        <div
+          style="margin: 0 5px"
+          [style.width]="currentBannerIndex===i?'12px':'6px'"
+          [style.height]="currentBannerIndex===i?'12px':'6px'"
+          [style.border-radius]="currentBannerIndex===i?'6px':'3px'"
+          [style.background]="currentBannerIndex===i?'var(--whiteColor)':'var(--lightGreenColor)'"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-container" style="margin-top: 20px">
+    <div
+      class="rowAlignCenter"
+      style="justify-content: space-between; margin: 10px"
+    >
+      <div class="rowAlignCenter" style="flex: 1">
+        <div
+          class="center circle40"
+          style="background-color: var(--blackColor)"
+        >
+          <span
+            class="material-icons"
+            style="font-size: 20px; color: var(--yellowColor)"
+          >
+            tag
+          </span>
+        </div>
+        <div class="column" style="flex: 1; margin: 0 10px">
+          <ion-text
+            class="whiteColor15Bold ellipseText"
+            style="-webkit-line-clamp: 1"
+          >
+            Elige Una Ciudad
+          </ion-text>
+          <ion-text class="grayColor12Regular" style="margin-top: 3px">
+            108.8k visualizaciones
+          </ion-text>
+        </div>
+      </div>
+      <div class="rowAlignCenter">
+        <ion-text class="grayColor14Regular"> Ver todas </ion-text>
+        <ion-icon
+          name="chevron-forward"
+          color="grayColor"
+          style="font-size: 16px; margin-left: 10px"
+        ></ion-icon>
+      </div>
+    </div>
+    <div class="horizontalScroll" style="padding: 0 10px">
+
+      <div *ngFor="let item of citiesList" style="display: inline-block" (click)="goCity(seachTag.value, seachCityId.value)">
+        <ion-card  [ngStyle]="{'background-image': 'url(' + item.image + ')'}" 
+        style="background-size: cover;background-position: center center;background-repeat: no-repeat;width: 130px;height: 190px;">
+          <ion-input #seachTag value="{{item.searchTag}}" hidden style="visibility: hidden;"></ion-input>
+          <ion-input #seachCityId value="{{item.cityId}}" hidden style="visibility: hidden;"></ion-input>
+          <ion-card-header style="width: 100%;
+          padding: 0;
+          bottom: 0;
+          position: absolute;
+          background: black;">
+            <ion-card-title style="font-size: 1.1rem; color: white;padding: 3px;opacity: 1;text-align: center;">{{item.name}}</ion-card-title>
+            <!--ion-card-subtitle style="padding: 3px;opacity: 1;text-align: center;">{{item.name}}</ion-card-subtitle -->
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-container" style="margin-top: 20px">
+    <div
+      class="rowAlignCenter"
+      style="justify-content: space-between; margin: 10px"
+    >
+      <div class="rowAlignCenter" style="flex: 1">
+        <div
+          class="center circle40"
+          style="background-color: var(--blackColor)"
+        >
+          <span
+            class="material-icons"
+            style="font-size: 20px; color: var(--yellowColor)"
+          >
+            tag
+          </span>
+        </div>
+        <div class="column" style="flex: 1; margin: 0 10px">
+          <ion-text
+            class="whiteColor15Bold ellipseText"
+            style="-webkit-line-clamp: 1"
+          >
+            Más en Honduras
+          </ion-text>
+          <ion-text class="grayColor12Regular" style="margin-top: 3px">
+            159.8k visualizaciones
+          </ion-text>
+        </div>
+      </div>
+      <div class="rowAlignCenter">
+        <ion-text class="grayColor14Regular"> Ver todas </ion-text>
+        <ion-icon
+          name="chevron-forward"
+          color="grayColor"
+          style="font-size: 16px; margin-left: 10px"
+        ></ion-icon>
+      </div>
+    </div>
+    <div class="horizontalScroll" style="padding: 0 10px">
+
+      <div *ngFor="let item of masList" style="display: inline-block" (click)="goMore(seachMoreTag.value, seachMoreId.value)">
+        <ion-card  [ngStyle]="{'background-image': 'url(' + item.image + ')'}" 
+        style="background-size: cover;background-position: center center;background-repeat: no-repeat;width: 130px;height: 190px;">
+        <ion-input #seachMoreTag value="{{item.searchTag}}" hidden style="visibility: hidden;"></ion-input>
+        <ion-input #seachMoreId value="{{item.moreId}}" hidden style="visibility: hidden;"></ion-input>
+          <ion-card-header style="width: 100%;
+          padding: 0;
+          bottom: 0;
+          position: absolute;
+          background: black;color: white;">
+            <ion-card-title style="font-size: 1.1rem; color: white;padding: 3px;opacity: 1;text-align: center;">{{item.name}}</ion-card-title>
+            <!--ion-card-subtitle style="padding: 3px;opacity: 1;text-align: center;">{{item.name}}</ion-card-subtitle -->
+          </ion-card-header>
+        </ion-card>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="scroll-container" style="margin: 20px 0">
+    <div
+      class="rowAlignCenter"
+      style="justify-content: space-between; margin: 10px"
+    >
+      <div class="rowAlignCenter" style="flex: 1">
+        <div
+          class="center circle40"
+          style="background-color: var(--blackColor)"
+        >
+          <span
+            class="material-icons"
+            style="font-size: 20px; color: var(--yellowColor)"
+          >
+            tag
+          </span>
+        </div>
+        <div class="column" style="flex: 1; margin: 0 10px">
+          <ion-text
+            class="whiteColor15Bold ellipseText"
+            style="-webkit-line-clamp: 1"
+          >
+            Transporte
+          </ion-text>
+          <ion-text class="grayColor12Regular" style="margin-top: 3px">
+            231.9k visualizaciones
+          </ion-text>
+        </div>
+      </div>
+      <div class="rowAlignCenter">
+        <ion-text class="grayColor14Regular"> View todas </ion-text>
+        <ion-icon
+          name="chevron-forward"
+          color="grayColor"
+          style="font-size: 16px; margin-left: 10px"
+        ></ion-icon>
+      </div>
+    </div>
+    <div class="horizontalScroll" style="padding: 0 10px">
+      <div *ngFor="let item of transportList" style="display: inline-block">
+        <ion-card  [ngStyle]="{'background-image': 'url(' + item.image + ')'}"   (click)="goTransportation(seachTrTag.value, seachTrId.value)"
+        style="background-size: cover;background-position: center center;background-repeat: no-repeat;width: 130px;height: 190px;">
+        <ion-input #seachTrTag value="{{item.searchTag}}" hidden style="visibility: hidden;"></ion-input>
+        <ion-input #seachTrId value="{{item.transportId}}" hidden style="visibility: hidden;"></ion-input>
+          <ion-card-header style="width: 100%;
+          padding: 0;
+          bottom: 0;
+          position: absolute;
+          background: black;color: white;">
+            <ion-card-title style="font-size: 1.1rem; color: white;padding: 3px;opacity: 1;text-align: center;">{{item.name}}</ion-card-title>
+            <!--ion-card-subtitle style="padding: 3px;opacity: 1;text-align: center;">{{item.name}}</ion-card-subtitle -->
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-container" style="margin: 20px 0;display: none;">
+    <div
+      class="rowAlignCenter"
+      style="justify-content: space-between; margin: 10px"
+    >
+      <div class="rowAlignCenter" style="flex: 1">
+        <div
+          class="center circle40"
+          style="background-color: var(--blackColor)"
+        >
+          <span
+            class="material-icons"
+            style="font-size: 20px; color: var(--yellowColor)"
+          >
+            tag
+          </span>
+        </div>
+        <div class="column" style="flex: 1; margin: 0 10px">
+          <ion-text
+            class="whiteColor15Bold ellipseText"
+            style="-webkit-line-clamp: 1"
+          >
+            Resultados
+          </ion-text>
+          <ion-text class="grayColor12Regular" style="margin-top: 3px">
+            ...
+          </ion-text>
+        </div>
+      </div>
+      <div class="rowAlignCenter">
+        <ion-text class="grayColor14Regular"> View todas </ion-text>
+        <ion-icon
+          name="chevron-forward"
+          color="grayColor"
+          style="font-size: 16px; margin-left: 10px"
+        ></ion-icon>
+      </div>
+    </div>
+    <div class="" style="padding: 0px;width: 99%;">
+      <ion-grid class="ion-no-padding">
+        <ion-row style="width: 100%;">
+          <ion-col *ngFor="let item of results" size="6">
+            <div style="display: inline-block">
+              <ion-card  [ngStyle]="{'background-image': 'url(' + item.image + ')'}" 
+              style="background-size: cover;background-position: center center;background-repeat: no-repeat;width: 160px;height: 270px;">
+                <ion-input #seachTag [hidden]="true" value="{{item.searchTag}}"
+                style="visibility: hidden;"></ion-input>
+                <ion-card-header style="width: 100%;
+                padding: 0;
+                bottom: 0;
+                position: absolute;
+                background: black;color: white;">
+                  <ion-card-title style="font-size: 1.1rem; color: white;padding: 3px;opacity: 1;text-align: center;">{{item.name}}</ion-card-title>
+                  <!--ion-card-subtitle style="padding: 3px;opacity: 1;text-align: center;">{{item.name}}</ion-card-subtitle -->
+                </ion-card-header>
+              </ion-card>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+    </div>
+  </div>
+
+</ion-content>

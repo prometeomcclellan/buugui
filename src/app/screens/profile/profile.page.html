@@ -1,0 +1,299 @@
+<ion-header [translucent]="false">
+  <ion-toolbar color="blackColor">
+    <div style="display: flex; justify-content: flex-end; padding: 20px 13px">
+      <ion-icon
+        (click)="goBack()"
+        name="arrow-back"
+        color="whiteColor"
+        style="font-size: 24px; position: absolute; left: 5px"
+      ></ion-icon>
+      <ion-icon
+        id="openMenu"
+        name="ellipsis-vertical"
+        color="whiteColor"
+        style="font-size: 20px"
+      ></ion-icon>
+      <ion-popover
+        mode="md"
+        #popover
+        trigger="openMenu"
+        alignment="left"
+        class="menu"
+      >
+        <ng-template>
+          <div
+            class="column margin20"
+            style="background-color: var(--whiteColor)"
+          >
+            <div
+              (click)="popover.dismiss();goTo('profile-settings')"
+              class="rowAlignCenter"
+            >
+              <span
+                class="material-icons"
+                style="
+                  font-size: 20px;
+                  color: var(--blackColor);
+                  margin-right: 10px;
+                "
+              >
+                person_outline
+              </span>
+              <ion-text class="blackColor14Bold"> Ajustes de Perfil </ion-text>
+            </div>
+
+            <div
+              (click)="popover.dismiss();"
+              class="rowAlignCenter"
+              style="margin: 25px 0"
+            >
+              <span
+                class="material-icons"
+                style="
+                  font-size: 20px;
+                  color: var(--blackColor);
+                  margin-right: 10px;
+                "
+              >
+                share
+              </span>
+              <ion-text class="blackColor14Bold"> Compartir Perfil </ion-text>
+            </div>
+
+            <div
+              (click)="popover.dismiss();goTo('terms-of-use')"
+              class="rowAlignCenter"
+            >
+              <span
+                class="material-icons"
+                style="
+                  font-size: 20px;
+                  color: var(--blackColor);
+                  margin-right: 10px;
+                "
+              >
+                vpn_key
+              </span>
+              <ion-text class="blackColor14Bold"> Términos de Uso </ion-text>
+            </div>
+
+            <div
+              (click)="popover.dismiss();"
+              class="rowAlignCenter"
+              style="margin: 25px 0"
+            >
+              <span
+                class="material-icons"
+                style="
+                  font-size: 20px;
+                  color: var(--blackColor);
+                  margin-right: 10px;
+                "
+              >
+                star
+              </span>
+              <ion-text class="blackColor14Bold"> Califícanos </ion-text>
+            </div>
+
+            <div
+              (click)="popover.dismiss();showLogoutDialog=true"
+              class="rowAlignCenter"
+            >
+              <span
+                class="material-icons"
+                style="
+                  font-size: 20px;
+                  color: var(--blackColor);
+                  margin-right: 10px;
+                "
+              >
+                logout
+              </span>
+              <ion-text class="blackColor14Bold"> Cerrar Sesión </ion-text>
+            </div>
+          </div>
+        </ng-template>
+      </ion-popover>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content
+  color="blackColor"
+  [fullscreen]="true"
+  [scrollEvents]="true"
+  (ionScroll)="handleScroll($any($event))"
+>
+  <div class="columnAlignCenter" style="margin: 20px; margin-top: 5px">
+    <ion-img id="userPicture"
+      src='{{profilePicture}}'
+      class="imageOverflow profileImageCircle"
+    ></ion-img>
+
+    <ion-text id="userName" class="whiteColor17SemiBold" style="margin: 10px">
+      {{postUserName}}
+    </ion-text>
+
+    <div class="rowAlignCenter" style="align-self: stretch; margin: 10px 70px">
+      <div (click)="goTo('edit-profile')" class="center borderButton">
+        <ion-text
+          class="whiteColor15SemiBold ellipseText"
+          style="-webkit-line-clamp: 1"
+        >
+          Editar Perfil
+        </ion-text>
+      </div>
+      <ion-img
+        src="../../../assets/images/Tiktok-Free-Photo-png.png"
+        style="width: 40px; height: 40px; object-fit: contain"
+      >
+      </ion-img>
+    </div>
+
+    <div class="row likeFollowAndFollowing">
+      <div class="columnAlignCenter" style="flex: 1">
+        <ion-label class="kaka">{{postLikes}}</ion-label>
+        <ion-text class="grayColor14Regular" style="margin-top: 3px">
+          Reacciones
+        </ion-text>
+      </div>
+      <div class="columnAlignCenter" style="flex: 1">
+        <ion-label class="kaka">{{clientFollowers}}</ion-label>
+        <ion-text class="grayColor14Regular" style="margin-top: 3px">
+          Seguidores
+        </ion-text>
+      </div>
+      <div class="columnAlignCenter" style="flex: 1">
+        <ion-label class="kaka">{{clientFollowing}}</ion-label>
+        <ion-text class="grayColor14Regular" style="margin-top: 3px">
+          Siguiendo
+        </ion-text>
+      </div>
+    </div>
+  </div>
+
+  <div
+    [slot]="scrollValue>=270?'fixed':''"
+    [style.top]="scrollValue>=270?'0px':null"
+    class="row"
+    style="width: 100%; background-color: var(--blackColor)"
+  >
+    <div
+      (click)="selectedTabIndex= 0"
+      class="columnAlignCenter"
+      style="flex: 1"
+    >
+      <span
+        class="material-icons"
+        style="font-size: 25px; color: var(--whiteColor)"
+      >
+        dashboard
+      </span>
+      <div
+        class="tabIndicator"
+        [style.background]="selectedTabIndex===0?'var(--whiteColor)':'transparent'"
+      ></div>
+    </div>
+    <div
+      (click)="selectedTabIndex= 1"
+      class="columnAlignCenter"
+      style="flex: 1"
+    >
+      <span
+        class="material-icons"
+        style="font-size: 25px; color: var(--whiteColor)"
+      >
+        favorite_outline
+      </span>
+      <div
+        class="tabIndicator"
+        [style.background]="selectedTabIndex===1?'var(--whiteColor)':'transparent'"
+      ></div>
+    </div>
+    <div
+      (click)="selectedTabIndex= 2"
+      class="columnAlignCenter"
+      style="flex: 1"
+    >
+      <span
+        class="material-icons"
+        style="font-size: 25px; color: var(--whiteColor)"
+      >
+        bookmark_outline
+      </span>
+      <div
+        class="tabIndicator"
+        [style.background]="selectedTabIndex===2?'var(--whiteColor)':'transparent'"
+      ></div>
+    </div>
+  </div>
+
+  <div>
+    <ion-grid [fixed]="true" style="--ion-grid-padding: 0px">
+      <ion-row>
+        <ion-col
+          style="--ion-grid-column-padding: 2px"
+          size="4"
+          *ngFor="let item of selectedTabIndex==0? contentUser:selectedTabIndex==1?favoriteImagesList:bookmarkedImagesList; let i=index"
+        >
+          <!--ion-img
+            [src]="item.image"
+            class="imageOverflow"
+            style="width: 100%; height: 130px; border-radius: 5px"
+          ></ion-img -->
+
+          <video
+              #horizontalVideo
+              id="horizontalVideo{{i}}"
+              width="100%"
+              height="160px"
+              playsinline
+              loop
+              style="object-fit: fill; height: 100%"
+              class="profile-video imageOverflow"
+            >
+              <source [src]="item.url" type="video/mp4" />
+            </video>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-modal
+    mode="md"
+    [isOpen]="showLogoutDialog"
+    (didDismiss)="showLogoutDialog=false"
+    #modalCtrl
+  >
+    <ng-template>
+      <div class="margin20" style="margin-top: 25px">
+        <ion-text
+          class="blackColor18Bold"
+          style="display: flex; justify-content: center"
+        >
+          You sure want to logout?
+        </ion-text>
+        <div
+          class="row"
+          style="margin: 10px; margin-top: 25px; justify-content: space-between"
+        >
+          <div
+            (click)="showLogoutDialog=false;"
+            class="center smallButton"
+            style="background-color: var(--grayColor); margin-right: 10px"
+          >
+            <ion-text class="blackColor16Bold"> Cancel </ion-text>
+          </div>
+          <div
+            (click)="showLogoutDialog=false;modalCtrl.dismiss();goTo('/auth/login') "
+            class="center smallButton"
+            style="background-color: var(--primaryColor); margin-left: 10px"
+          >
+            <ion-text class="whiteColor16Bold"> Log out </ion-text>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+</ion-content>
